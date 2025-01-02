@@ -32,15 +32,14 @@ const sequelize = require('../config/db.config');
 const Magasin = sequelize.define('Magasin', {
     idMagasin: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIcrement: true
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
     },
     nomMagasin : {
-        type: DataTypes.STRING,
-        allowNull : false,
+        type: DataTypes.STRING(30), allowNull: false
     },
     localisation : {
-        type : DataTypes.STRING,
-        allowNull : true,
+        type: DataTypes.STRING(30), allowNull: false
     }
 });

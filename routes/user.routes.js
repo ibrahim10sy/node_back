@@ -31,7 +31,7 @@ router.post('/users/create', userCon.createUser);
 
 /**
  * @swagger
- * /api/users/getAllUsers
+ * /api/users/getAllUsers:
  *   get:
  *     summary: Retrieve all users
  *     tags: [User]
@@ -45,11 +45,10 @@ router.post('/users/create', userCon.createUser);
  *               items:
  *                 $ref: '#/components/schemas/User'
  */
-router.get('/users/getAllUser', userCon.getUsers);
-
+router.get('/users/getAllUsers', userCon.getUsers);
 /**
  * @swagger
- * /api/users/getUserById:
+ * /api/users/getUserById/{id}:
  *   get:
  *     summary: Retrieve all user
  *     tags: [User]
@@ -67,8 +66,8 @@ router.get('/users/getUserById/:id', userCon.getUserById);
 
 /**
  * @swagger
- * /api/users/update/:id
- *   get:
+ * /api/users/update/{id}:
+ *   put:
  *     summary: update a user
  *     tags: [User]
  *     responses:
@@ -85,10 +84,10 @@ router.put('/users/update/:id', userCon.updateUsers);
 
 /**
  * @swagger
- * /api/users/deleteUser/:id
+ * /api/users/deleteUser/{id}:
  *   delete:
  *     summary: remove user
- *     tags: [Roles]
+ *     tags: [User]
  *     responses:
  *       200:
  *         description: remove user.

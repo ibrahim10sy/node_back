@@ -1,36 +1,46 @@
-const {User,Role,Magasin} = require('../models')
+const {User} = require('../models')
 
 const createUser = async (userData) => {
-    return await User.create(userData, {include : ['role']});
+    const newUser =  await User.create(userData);
+    return newUser;
 }
 
 const getAllUsers = async () => {
     return await User.findAll();
+};
+
+ const getUserByEmail = async (email) => {
+    return await User.findOne({where : {email}});
 }
 
 const getUserById = async (id) => {
     const u = await User.findByPk(id);
+    if(!u){
+        throw new Error('Aucun user trouvé');
+    }
     return u;
 }
 
-const updateUser = async(user,id) => {
-    const u = await User.findByPk(id);
+const updateUser = async(user,idUser) => {
+    const u = await User.findByPk(idUser);
 
     if(!u){
         throw new Error('Aucun user trouvé');
     }
 
-    return u.update(user);
+    return u.update({user}, {where : {idUser : idUser}});
 }
 
-const deleteUser = async (id) => {
-    const u = await User.findByPk(id);
+const deleteUser = async (idUser) => {
+    const u = await User.findByPk(idUser);
 
     if (!u) {
         throw new Error("User non trouvé");
     }
 
-    await u.destroy();
+    await u.destroy({
+        where: { idUser: idUser },
+      });
     return "Supprimé avec succès";
 };
 

@@ -51,7 +51,7 @@ router.post('/magasin/create', magCon.magasinCreate);
 
 /**
  * @swagger
- * /api/magasin/update/:id:
+ * /api/magasin/update/{id}:
  *   put:
  *     summary: update a  magasin
  *     tags: [Magasin]
@@ -70,7 +70,7 @@ router.put('/magasin/update/:id', magCon.updateMagasin);
 
 /**
  * @swagger
- * /api/magasin/delete/:id
+ * /api/magasin/delete/{id}:
  *   delete:
  *     summary: Delete magasin
  *     tags: [Magasin]

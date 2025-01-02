@@ -3,8 +3,9 @@ const magService = require('../services/magasin.service');
 const magasinCreate = async (req,res) => {
     try {
         const mag = await magService.createMagasin(req.body);
-        res.status(200).json(role);
+        res.status(200).json(mag);
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: error.message });
     }
 }
@@ -18,9 +19,9 @@ const getAllMagasin = async (req, res) => {
     }
 };
 
-const  getMagasinById = async (req, res) => {
+const  getMagasinById = ("/:idMagasin",  async (req, res) => {
     try {
-        const mag = await magService.getMagasinById(req.params.id);
+        const mag = await magService.getMagasinById(req.params.idMagasin);
         if (!mag) {
             res.status(404).json({ message: 'Aucun magasin trouvé' });
         } else {
@@ -29,33 +30,43 @@ const  getMagasinById = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Failed to fetch user.' });
     }
-}
+});
 
-const updateMagasin = async (req,res) => {
+const updateMagasin = ("/:idMagasin" ,async (req,res) => {
     try {
-        const mag = await magService.updateMagasin(req.body, req.params.id);
+        const m = await magService.getMagasinById(req.params.idMagasin);
+        if (!m) {
+            return res
+              .status(404)
+              .json({ statusCode: 404, error: "Magasin Does not exist" });
+          }
+        const mag = await magService.updateMagasin(req.body);
         res.json(mag);
     } catch (error) {
-        if (error.message === 'Aucun magasin trouvé ') {
-            res.status(404).json({ message: error.message });
-        } else {
+      
             res.status(500).json({ message: error.message });
-        }
+    
     }
-}
+});
 
-const deleteMagasin =  async (req, res) => {
+const deleteMagasin = ("/:idMagasin" , async (req, res) => {
     try {
-        const message = await magService.deleteMagasin(req.params.id);
-        res.json({ message });
+        const m = await magService.getMagasinById(req.params.idMagasin);
+        if (!m) {
+            return res
+              .status(404)
+              .json({ statusCode: 404, error: "Magasin Does not exist" });
+          }
+        await magService.deleteMagasin(req.params.id);
+        return res.json({
+            statusCode: 200,
+            message: `Magasin supprimé avec succès`,
+          });
     } catch (error) {
-        if (error.message === 'Aucun magasin trouvé') {
-            res.status(404).json({ message: error.message });
-        } else {
+        
             res.status(500).json({ message: error.message });
-        }
     }
-};
+});
 
 
 module.exports = {deleteMagasin,getAllMagasin,getMagasinById,magasinCreate,updateMagasin}

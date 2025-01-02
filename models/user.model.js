@@ -52,41 +52,32 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db.config')
 const Role = require('./role.model')
-const Magasin = require('../models/magasin.model')
 
 const User = sequelize.define('User', {
     idUser: {
         type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
-        autoIcrement: true
     },
     username: {
-        type:  DataTypes.STRING,
-        allowNull: false,
+        type: DataTypes.STRING(30), allowNull: false
         
     },
     password: {
-        type:  DataTypes.STRING,
-        allowNull: false,
-        unique: false
+        type: DataTypes.STRING(30), allowNull: false
     },
     email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
+        type: DataTypes.STRING(30), allowNull: false,
         validate: {
           isEmail: true,
         },
       },
     adresse: {
-        type:  DataTypes.STRING,
-        allowNull: false,
-        unique: true
+        type: DataTypes.STRING(30), allowNull: false
     },
     pays: {
-        type:  DataTypes.STRING,
-        allowNull: false,
-        unique: true
+        type: DataTypes.STRING(30), allowNull: false
     },
     roleId: {
         type: DataTypes.INTEGER,
@@ -96,9 +87,5 @@ const User = sequelize.define('User', {
         }
     },
 });
-
-// Relations
-// User.belongsTo(Role, { foreignKey: 'roleId', as: 'role' });
-// User.belongsToMany(Magasin, { through: 'UserMagasins', as: 'magasins' });
 
 module.exports = User;

@@ -36,17 +36,16 @@ const sequelize = require('../config/db.config');
 
 const Role = sequelize.define('Role',{
     idRole: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIcrement: true
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
     },
     libelle : {
-        type : DataTypes.STRING,
-        allowNull : false
+        type: DataTypes.STRING(30), allowNull: false
     }, 
     description : {
-        type : DataTypes.STRING,
-        allowNull : false
+        type: DataTypes.STRING(30), allowNull: false
     }, 
 });
  

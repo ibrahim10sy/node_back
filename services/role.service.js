@@ -1,39 +1,50 @@
 const  { Role }= require('../models')
 
-const createRole = async (role) => {
-    return  Role.create(role);
+const createRole = async (roleData) => {
+    const { libelle, description } = roleData;
+
+    // Vérification avant d'essayer de créer un rôle
+    if (!libelle || !description) {
+        throw new Error("Libelle and description are required");
+    }
+
+    const newRole = await Role.create(roleData);
+    return newRole;
 };
 
+
 const getRole = async () => {
-    return Role.findAll();
+    return await Role.findAll();
 }
 
-const getRoleById = async (id) => {
-   const r =  Role.findByPk(id);
+const getRoleById = async (idRole) => {
+   const r =  Role.findByPk(idRole);
    if(!r){
     throw new Error("Aucun rôle trouvé");
    }
     return r;
 }
 
-const updateRole = async (role,id) => {
-    const existeRole = await Role.findByPk(id);
+const updateRole = async (role,idRole) => {
+    const existeRole = await Role.findByPk(idRole);
 
     if(!existeRole){
         throw new Error('Aucun rôle trouvé');
     }
 
-    return existeRole.update(role);
+    return existeRole.update({role}, {where : {idRole : idRole}});
 }
 
-const deleteRole = async(id) => {
-    const role = await Role.findByPk(id);
+const deleteRole = async(idRole) => {
+    const role = await Role.findByPk(idRole);
 
     if(!role){
         throw new Error("Aucun rôle trouvé");
     }
 
-    await role.destroy();
+    await role.destroy({
+        where: { idRole: idRole },
+      });
     return "Supprimé avec succès";
 }
 

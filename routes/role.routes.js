@@ -15,7 +15,7 @@ const router = express.Router();
  * /api/role/getRole:
  *   get:
  *     summary: Retrieve all roles
- *     tags: [Roles]
+ *     tags: [Role]
  *     responses:
  *       200:
  *         description: A list of roles.
@@ -33,7 +33,7 @@ router.get('/role/getRole', roleCon.getRole);
  * /api/role/create:
  *   post:
  *     summary: Add a new role
- *     tags: [Roles]
+ *     tags: [Role]
  *     responses:
  *       200:
  *         description: Add a new role.
@@ -48,10 +48,10 @@ router.post('/role/create', roleCon.roleCreate);
 
 /**
  * @swagger
- * /api/role/update/:id
+ * /api/role/update/{id}:
  *   put:
  *     summary: update a  roles
- *     tags: [Roles]
+ *     tags: [Role]
  *     responses:
  *       200:
  *         description: update a role.
@@ -66,10 +66,10 @@ router.put('/role/update/:id', roleCon.updateRoles);
 
 /**
  * @swagger
- * /api/role/delete/:id
+ * /api/role/delete/{id}:
  *   delete:
  *     summary: Remove a role
- *     tags: [Roles]
+ *     tags: [Role]
  *     responses:
  *       200:
  *         description: Remove a role

@@ -1,39 +1,43 @@
-const  {Magasin} = require('../models');
+const { where } = require('sequelize');
+const  Magasin = require('../models/magasin.model');
 
 const createMagasin = async (mag) => {
-    return Magasin.create(mag);
+    const newMag = await Magasin.create(mag);
+    return newMag;
 }
 
 const getMagasin = async () => {
     return Magasin.findAll();
 }
 
-const getMagasinById = async (id) => {
-    const m = Magasin.findByPk(id);
+const getMagasinById = async (idMagasin) => {
+    const m = Magasin.findByPk(idMagasin);
     if(!m){
         throw new Error("Aucun magasin trouvé");
        }
     return m;
 }
 
-const updateMagasin = async (mag, id) => {
+const updateMagasin = async (mag, idMagasin) => {
     const m = await Magasin.findByPk(id);
 
     if(!m){
         throw new Error('Aucun magasin trouvé');
     }
 
-    return m.update(mag);
+    return m.update({mag}, {where : {idMagasin : idMagasin}});
 }
 
-const deleteMagasin = async (id) => {
-    const m = await Magasin.findByPk(id);
+const deleteMagasin = async (idMagasin) => {
+    const m = await Magasin.findByPk(idMagasin);
 
     if(!m){
         throw new Error("Aucun magasin trouvé");
     }
 
-    await m.destroy();
+    await m.destroy({
+        where: { idMagasin: idMagasin },
+      });
 
     return "Supprimé avec succèss";
 }
