@@ -26,7 +26,7 @@ const { swaggerDocs, swaggerUi } = require('./config/swaggerConfig');
 
 // app.use(express.urlencoded({ extended : true }));
 
-// Middleware pour Swagger
+// Middlewares pour Swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.get("/" , (req,res ) => {
@@ -41,7 +41,7 @@ app.use('/api', magasinRoutes);
 //init database
 
 intitDB();
-
+  
 const port = process.env.PORT || 9000;
 
 app.listen(port, ()=> console.log(`Server is running on port ${port}`));
