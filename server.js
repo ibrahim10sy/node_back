@@ -7,7 +7,7 @@ const magasinRoutes = require('./routes/magasin.route');
 
 const app = express();
 const { swaggerDocs, swaggerUi } = require('./config/swaggerConfig');
-// const cors = require("cors");
+
 
 //Middleware
 // app.use(bodyParse.json());
