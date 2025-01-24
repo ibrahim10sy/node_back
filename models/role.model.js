@@ -42,10 +42,10 @@ const Role = sequelize.define('Role',{
       primaryKey: true,
     },
     libelle : {
-        type: DataTypes.STRING(30), allowNull: false
+        type: DataTypes.STRING(30), allowNull: true
     }, 
     description : {
-        type: DataTypes.STRING(30), allowNull: false
+        type: DataTypes.STRING(30), allowNull: true
     }, 
 });
  

@@ -4,7 +4,11 @@ const  roleService=  require('../services/role.service');
 
 const roleCreate = async (req, res) => {
     try {
+        // console.log("hI");
         
+        console.log(req.body)
+        // console.log(req.query)
+
         const { libelle, description } = req.body;
 
         if (!libelle || !description) {

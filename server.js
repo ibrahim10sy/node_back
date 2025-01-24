@@ -10,7 +10,7 @@ const { swaggerDocs, swaggerUi } = require('./config/swaggerConfig');
 
 
 //Middleware
-// app.use(bodyParse.json());
+app.use(bodyParse.json());
 
 // var corsOptions = {
 //     origin : "http://localhost:9000"
@@ -20,9 +20,9 @@ const { swaggerDocs, swaggerUi } = require('./config/swaggerConfig');
 
 // //content-type application/json
 
-// app.use(express.json());
+app.use(express.json());
 
-// //  content-type - application/x-www-form-urlencoded
+
 
 // app.use(express.urlencoded({ extended : true }));
 
@@ -41,7 +41,7 @@ app.use('/api', magasinRoutes);
 //init database
 
 intitDB();
-  
+
 const port = process.env.PORT || 9000;
 
 app.listen(port, ()=> console.log(`Server is running on port ${port}`));
